@@ -40,14 +40,14 @@ export default function AboutPage() {
                 Xuất phát điểm với sự tò mò về thế giới số, mình đã chọn theo đuổi sự giao thoa giữa <strong>Lập trình Web</strong> và <strong>Marketing chiến lược</strong>. Mình không chỉ muốn viết ra những website chạy mượt mà, mà còn muốn chúng thực sự "biết nói" và mang lại chuyển đổi kinh doanh.
               </p>
               <p>
-                Việc tự tay xây dựng các dự án cá nhân và quản lý cửa hàng (C8 Mậu Thân) giúp mình có góc nhìn thực tế nhất về những gì một doanh nghiệp thực sự cần ở nền tảng online.
+                Việc tự tay xây dựng các dự án cá nhân và quản lý cửa hàng trực tuyến giúp mình có góc nhìn thực tế nhất về những gì một doanh nghiệp thực sự cần ở nền tảng online.
               </p>
             </div>
 
             <div className="pt-6 border-t border-earth/20">
               <h2 className="text-2xl font-bold text-earth-dark mb-4">Cuộc sống ngoài màn hình</h2>
               <p className="mb-4">
-                Khi tạm rời xa bàn phím, mình là một người ưa xê dịch và rèn luyện. Bạn sẽ thường thấy mình rong ruổi giải tỏa căng thẳng trên chiếc Yamaha YZF-R15 V3, hoặc đang say sưa ghi lại những khoảnh khắc cuộc sống, chỉnh sửa hậu kỳ tỉ mỉ qua lăng kính của chiếc Canon 750D.
+                Khi tạm rời xa bàn phím, mình là một người ưa xê dịch và rèn luyện. Bạn sẽ thường thấy mình rong ruổi giải tỏa căng thẳng trên chiếc Yamaha MT03, hoặc đang say sưa ghi lại những khoảnh khắc cuộc sống, chỉnh sửa hậu kỳ tỉ mỉ qua lăng kính của chiếc Canon Rp.
               </p>
               <p>
                 Đặc biệt, việc gắn bó và tập luyện tại Câu lạc bộ Karate Phú Yên đã rèn luyện cho mình một ý chí kỷ luật thép, sự điềm tĩnh và khả năng tập trung cao độ – những tố chất cực kỳ quan trọng giúp mình giải quyết các bài toán khó trong lập trình và kinh doanh.

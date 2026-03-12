@@ -74,7 +74,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h4 className="font-semibold text-lg mb-1">Cửa hàng trực tiếp</h4>
-                    <p className="text-earth-light/80 leading-relaxed">C8 Mậu Thân, TP. Tuy Hòa, Phú Yên</p>
+                    <p className="text-earth-light/80 leading-relaxed">48 Bàu Trảng 5, Q.Thanh Khê, TP.Đà Nẵng</p>
                   </div>
                 </li>
                 
@@ -84,7 +84,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h4 className="font-semibold text-lg mb-1">Email hợp tác</h4>
-                    <p className="text-earth-light/80">tu@trungtu.mkt</p>
+                    <p className="text-earth-light/80">trungtu2k6@gmail.com</p>
                   </div>
                 </li>
 
@@ -94,7 +94,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h4 className="font-semibold text-lg mb-1">Điện thoại / Zalo</h4>
-                    <p className="text-earth-light/80">09xx xxx xxx (Trung Tự)</p>
+                    <p className="text-earth-light/80">077 6910 286 (Trung Tự)</p>
                   </div>
                 </li>
               </ul>
