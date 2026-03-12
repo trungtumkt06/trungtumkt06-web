@@ -1,7 +1,40 @@
 import Link from 'next/link';
+import Image from 'next/image';
+import { client } from '@/sanity/lib/client';
 
-export default function Home() {
-  
+// 1. Hàm lấy 3 Dự án mới nhất từ Sanity
+async function getFeaturedProjects() {
+  const query = `*[_type == "project"][0...3] | order(_createdAt desc) {
+    _id,
+    title,
+    "slug": slug.current,
+    "category": category->title,
+    "imageUrl": mainImage.asset->url
+  }`;
+  return client.fetch(query);
+}
+
+// 2. Hàm lấy 4 Sản phẩm mới nhất từ Sanity
+async function getFeaturedProducts() {
+  const query = `*[_type == "product"][0...4] | order(_createdAt desc) {
+    _id,
+    name,
+    "slug": slug.current,
+    price,
+    tag,
+    type,
+    "imageUrl": image.asset->url
+  }`;
+  return client.fetch(query);
+}
+
+export default async function Home() {
+  // Lấy dữ liệu thật từ Sanity
+  const [projects, products] = await Promise.all([
+    getFeaturedProjects(),
+    getFeaturedProducts(),
+  ]);
+
   const services = [
     {
       title: "Lập trình Web",
@@ -26,18 +59,6 @@ export default function Home() {
     }
   ];
 
-  const featuredProjects = [
-    { title: "Website Thương mại điện tử", category: "Web Development", imagePlaceholder: "Giao diện Web" },
-    { title: "Chiến dịch Branding Mạng xã hội", category: "Marketing", imagePlaceholder: "Ấn phẩm Truyền thông" },
-    { title: "Bộ ảnh Lookbook Sản phẩm", category: "Photography", imagePlaceholder: "Chụp & Retouch" },
-  ];
-
-  // ĐÃ CẬP NHẬT: Danh sách sản phẩm số
-  const featuredProducts = [
-    { name: "Tài khoản Canva Pro (Edu) - 1 Năm", price: "99.000đ", tag: "Bán chạy", type: "Giao tự động" },
-    { name: "Tài khoản Canva Pro (Edu) - Vĩnh viễn", price: "199.000đ", tag: "Hot", type: "Bảo hành 1-1" },
-  ];
-
   return (
     <main className="min-h-screen">
       
@@ -57,10 +78,11 @@ export default function Home() {
           </div>
           <div className="relative flex justify-center items-center z-10 mt-10 md:mt-0">
             <div className="absolute w-64 h-64 md:w-96 md:h-96 bg-earth/20 rounded-full blur-3xl -z-10"></div>
-            <div className="relative w-72 h-72 md:w-[400px] md:h-[400px] rounded-full overflow-hidden border-4 border-white shadow-xl">
-              <div className="w-full h-full bg-earth/30 flex items-center justify-center text-earth-dark/50">
-                <span>[Ảnh Chân Dung]</span>
-              </div>
+            <div className="relative w-72 h-72 md:w-[400px] md:h-[400px] rounded-full overflow-hidden border-4 border-white shadow-xl bg-earth-light">
+               {/* Thay bằng Image thật của bạn nếu có */}
+               <div className="w-full h-full flex items-center justify-center text-earth-dark/30 font-bold uppercase tracking-widest text-sm">
+                 Trung Tự Mkt
+               </div>
             </div>
           </div>
         </div>
@@ -88,7 +110,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 3. FEATURED PROJECTS SECTION */}
+      {/* 3. FEATURED PROJECTS SECTION (DỮ LIỆU THẬT) */}
       <section className="py-24 bg-earth-dark text-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16">
@@ -102,48 +124,67 @@ export default function Home() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {featuredProjects.map((project, index) => (
-              <div key={index} className="group cursor-pointer">
-                <div className="w-full h-64 bg-white/10 rounded-xl mb-4 flex items-center justify-center overflow-hidden border border-white/5 relative">
-                  <span className="text-white/40">{project.imagePlaceholder}</span>
-                  <div className="absolute inset-0 bg-earth-accent/0 group-hover:bg-earth-accent/20 transition-all duration-300"></div>
+            {projects.map((project: any) => (
+              <Link href={`/du-an/${project.slug}`} key={project._id} className="group cursor-pointer">
+                <div className="w-full h-64 bg-white/10 rounded-xl mb-4 flex items-center justify-center overflow-hidden border border-white/5 relative shadow-inner">
+                  {project.imageUrl ? (
+                    <Image 
+                        src={project.imageUrl} 
+                        alt={project.title} 
+                        fill 
+                        className="object-cover group-hover:scale-110 transition-transform duration-700 opacity-80 group-hover:opacity-100" 
+                    />
+                  ) : (
+                    <span className="text-white/40 uppercase text-xs font-bold tracking-widest">Chưa có ảnh</span>
+                  )}
+                  <div className="absolute inset-0 bg-earth-accent/0 group-hover:bg-earth-accent/10 transition-all duration-300"></div>
                 </div>
-                <p className="text-earth-light/70 text-sm mb-1">{project.category}</p>
-                <h4 className="text-lg font-semibold group-hover:text-earth-accent transition-colors">{project.title}</h4>
-              </div>
+                <p className="text-earth-light/70 text-sm mb-1 uppercase tracking-wider font-semibold">{project.category}</p>
+                <h4 className="text-lg font-semibold group-hover:text-earth-accent transition-colors leading-snug">{project.title}</h4>
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 4. FEATURED PRODUCTS SECTION (ĐÃ CẬP NHẬT CHO SẢN PHẨM SỐ) */}
+      {/* 4. FEATURED PRODUCTS SECTION (DỮ LIỆU THẬT) */}
       <section className="py-24 bg-earth-light/20">
         <div className="max-w-7xl mx-auto px-6">
-           <div className="text-center mb-16">
+          <div className="text-center mb-16">
             <h3 className="text-earth-accent font-semibold tracking-widest uppercase text-sm mb-2">Dịch vụ phần mềm</h3>
             <h2 className="text-3xl md:text-4xl font-bold text-earth-dark">Sản phẩm nổi bật</h2>
             <div className="w-20 h-1 bg-earth mt-6 mx-auto rounded-full"></div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 justify-center">
-            {featuredProducts.map((product, index) => (
-              <div key={index} className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md transition-shadow group flex flex-col h-full border border-earth/5">
-                <div className="w-full h-48 bg-earth-light/40 rounded-lg mb-5 flex items-center justify-center relative overflow-hidden">
-                  <span className="absolute top-2 right-2 bg-earth-accent text-white text-[10px] font-bold px-2 py-1 rounded md uppercase tracking-wider z-10">
-                    {product.tag}
-                  </span>
-                  {/* Icon tượng trưng cho phần mềm */}
-                  <svg className="w-12 h-12 text-earth/40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>
+            {products.map((product: any) => (
+              <div key={product._id} className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md transition-shadow group flex flex-col h-full border border-earth/5">
+                <div className="w-full h-48 bg-earth-light/40 rounded-lg mb-5 flex items-center justify-center relative overflow-hidden border border-earth/5">
+                  {product.tag && (
+                    <span className="absolute top-2 right-2 bg-earth-accent text-white text-[10px] font-bold px-2 py-1 rounded md uppercase tracking-wider z-10 shadow-sm">
+                      {product.tag}
+                    </span>
+                  )}
+                  {product.imageUrl ? (
+                    <Image 
+                        src={product.imageUrl} 
+                        alt={product.name} 
+                        fill 
+                        className="object-cover p-6 group-hover:scale-110 transition-transform duration-500" 
+                    />
+                  ) : (
+                    <svg className="w-12 h-12 text-earth/40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>
+                  )}
                 </div>
                 
-                <p className="text-earth-accent text-xs font-semibold mb-2 uppercase tracking-wide">{product.type}</p>
+                <p className="text-earth-accent text-[10px] font-bold mb-2 uppercase tracking-widest">{product.type}</p>
                 <h4 className="font-bold text-earth-dark mb-3 line-clamp-2 leading-snug flex-grow">{product.name}</h4>
                 
                 <div className="pt-4 border-t border-earth/10 flex items-center justify-between mt-auto">
                   <p className="text-earth-dark font-bold text-lg">{product.price}</p>
-                  <button className="px-4 py-2 bg-earth text-white rounded-lg hover:bg-earth-dark transition-colors text-sm font-medium">
-                    Mua ngay
-                  </button>
+                  <Link href={`/san-pham/${product.slug}`} className="px-4 py-2 bg-earth text-white rounded-lg hover:bg-earth-dark transition-colors text-xs font-bold uppercase tracking-wider">
+                    Chi tiết
+                  </Link>
                 </div>
               </div>
             ))}
