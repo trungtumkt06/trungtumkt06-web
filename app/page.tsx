@@ -165,44 +165,63 @@ export default async function Home() {
       </section>
 
       {/* 4. FEATURED PRODUCTS SECTION */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="py-24 bg-white relative overflow-hidden">
+        {/* Họa tiết nền ẩn hiện */}
+        <div className="absolute top-0 left-0 w-72 h-72 bg-earth-light/10 rounded-full blur-3xl -z-10 -translate-x-1/2"></div>
+
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="text-center mb-16">
-            <h3 className="text-earth-accent font-bold tracking-widest uppercase text-xs mb-3">Dịch vụ phần mềm</h3>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-earth-dark">Sản phẩm nổi bật</h2>
+            <h3 className="text-earth-accent font-extrabold tracking-widest uppercase text-xs mb-3">Dịch vụ phần mềm</h3>
+            <h2 className="text-3xl md:text-5xl font-extrabold text-earth-dark tracking-tight">Sản phẩm nổi bật</h2>
+            <div className="w-12 h-1 bg-earth mt-6 mx-auto rounded-full"></div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 justify-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 justify-center">
             {products.map((product: any) => (
-              <Link href={`/san-pham/${product.slug}`} key={product._id} className="bg-white p-6 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-500 border border-earth/5 flex flex-col h-full group hover:-translate-y-2">
-                <div className="w-full h-48 bg-earth-light/20 rounded-2xl mb-6 flex items-center justify-center relative overflow-hidden border border-earth/5 p-4">
+              <Link 
+                href={`/san-pham/${product.slug}`} 
+                key={product._id} 
+                className="bg-white rounded-[2rem] shadow-sm hover:shadow-2xl transition-all duration-500 border border-earth/5 flex flex-col h-full group hover:-translate-y-2 overflow-hidden"
+              >
+                {/* Khung ảnh sản phẩm */}
+                <div className="w-full h-52 bg-gradient-to-br from-earth-light/20 to-transparent relative flex items-center justify-center p-6 overflow-hidden">
+                  {/* Tag Bán chạy / New */}
                   {product.tag && (
-                    <span className="absolute top-3 right-3 bg-earth text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider z-10 shadow-sm">
+                    <span className="absolute top-4 right-4 bg-earth text-white text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-widest z-20 shadow-md">
                       {product.tag}
                     </span>
                   )}
+                  
+                  {/* Vòng tròn trang trí mờ phía sau */}
+                  <div className="absolute w-32 h-32 bg-white/50 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700"></div>
+
                   {product.imageUrl ? (
                     <Image 
-                        src={product.imageUrl} 
-                        alt={product.name} 
-                        fill 
-                        className="object-contain p-4 group-hover:scale-110 transition-transform duration-500" 
+                      src={product.imageUrl} 
+                      alt={product.name} 
+                      fill 
+                      className="object-contain p-6 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-700 ease-in-out drop-shadow-xl z-10 rounded-2xl" 
                     />
                   ) : (
-                    <svg className="w-12 h-12 text-earth/20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>
+                    <svg className="w-12 h-12 text-earth/20 z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>
                   )}
                 </div>
                 
-                <p className="text-earth-accent text-[10px] font-bold mb-2 uppercase tracking-widest">{product.type}</p>
-                <h4 className="text-lg font-bold text-earth-dark mb-4 line-clamp-2 leading-snug flex-grow group-hover:text-earth transition-colors">{product.name}</h4>
-                
-                <div className="pt-4 border-t border-earth/10 flex items-center justify-between mt-auto">
-                  <div className="flex flex-col">
-                    <span className="text-[10px] text-earth-dark/40 uppercase font-bold tracking-widest">Chỉ từ</span>
-                    <p className="text-xl font-extrabold text-earth-dark">{product.price}</p>
-                  </div>
-                  <div className="w-10 h-10 bg-earth-light/30 text-earth rounded-full flex items-center justify-center group-hover:bg-earth group-hover:text-white transition-colors duration-300">
-                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                {/* Nội dung text */}
+                <div className="p-6 flex flex-col flex-grow">
+                  <p className="text-earth-accent text-[10px] font-bold mb-2 uppercase tracking-widest">{product.type}</p>
+                  <h4 className="text-lg font-bold text-earth-dark mb-6 line-clamp-2 leading-snug flex-grow group-hover:text-earth transition-colors">
+                    {product.name}
+                  </h4>
+                  
+                  <div className="pt-5 border-t border-earth/5 flex items-center justify-between mt-auto">
+                    <div className="flex flex-col">
+                      <span className="text-[10px] text-earth-dark/40 uppercase font-bold tracking-widest mb-1">Chỉ từ</span>
+                      <p className="text-xl font-extrabold text-earth-dark group-hover:text-earth transition-colors">{product.price}</p>
+                    </div>
+                    <div className="w-11 h-11 bg-earth-light/30 text-earth rounded-xl flex items-center justify-center group-hover:bg-earth group-hover:text-white group-hover:rotate-12 transition-all duration-300 shadow-sm">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                    </div>
                   </div>
                 </div>
               </Link>
@@ -210,13 +229,13 @@ export default async function Home() {
           </div>
           
           <div className="text-center mt-16">
-            <Link href="/san-pham" className="inline-block px-10 py-4 bg-white text-earth-dark border-2 border-earth/20 rounded-full hover:border-earth hover:text-earth transition-all duration-300 font-bold shadow-sm">
+            <Link href="/san-pham" className="inline-block px-12 py-4 bg-white text-earth-dark border-2 border-earth/20 rounded-full hover:border-earth hover:text-earth hover:shadow-lg transition-all duration-300 font-bold">
               Xem tất cả sản phẩm
             </Link>
           </div>
         </div>
       </section>
-
+      
       {/* 5. CALL TO ACTION */}
       <section className="py-24 bg-earth relative overflow-hidden">
         {/* Họa tiết trang trí */}
