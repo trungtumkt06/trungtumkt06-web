@@ -40,10 +40,10 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-semibold mb-4 uppercase tracking-wider text-sm">Dịch vụ</h4>
             <ul className="space-y-2 text-sm">
-              <li><Link href="#" className="hover:text-earth-accent transition-colors">Thiết kế Website</Link></li>
-              <li><Link href="#" className="hover:text-earth-accent transition-colors">Marketing & SEO</Link></li>
-              <li><Link href="#" className="hover:text-earth-accent transition-colors">Nhiếp ảnh & Retouch</Link></li>
-              <li><Link href="/products" className="hover:text-earth-accent transition-colors">Phần mềm & Tài khoản</Link></li>
+              <li><Link href="/dich-vu/thiet-ke-website" className="hover:text-earth-accent transition-colors">Thiết kế Website</Link></li>
+              <li><Link href="/dich-vu/marketing-seo" className="hover:text-earth-accent transition-colors">Marketing & SEO</Link></li>
+              <li><Link href="/dich-vu/nhiep-anh-retouch" className="hover:text-earth-accent transition-colors">Nhiếp ảnh & Retouch</Link></li>
+              <li><Link href="/san-pham" className="hover:text-earth-accent transition-colors">Phần mềm & Tài khoản</Link></li>
             </ul>
           </div>
 
