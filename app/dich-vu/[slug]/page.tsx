@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { client } from '@/sanity/lib/client';
+import ServiceCTA from '@/components/ServiceCTA';
 
 // Hàm tự động lấy 3 dự án mới nhất từ Sanity để làm "Bảo chứng niềm tin"
 async function getRecentProjects() {
@@ -229,13 +230,10 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
           <p className="text-earth-dark/70 mb-10 text-lg">
             Hãy nhắn tin trao đổi trực tiếp để cùng nhau tìm ra giải pháp tối ưu nhất cho doanh nghiệp của bạn.
           </p>
-          <Link 
-            href={`/lien-he?dv=${resolvedParams.slug}`} 
-            className="inline-flex items-center justify-center px-10 py-5 bg-earth text-white font-bold rounded-full hover:bg-earth-dark hover:-translate-y-1 shadow-xl transition-all duration-300"
-          >
-            Nhận tư vấn ngay
-            <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
-          </Link>
+          
+          {/* NÚT BẤM HIỂN THỊ POPUP VỪA TẠO */}
+          <ServiceCTA serviceName={service.title} />
+          
         </div>
       </section>
 
