@@ -21,15 +21,48 @@ export const productType = defineType({
     }),
     defineField({
       name: 'price',
-      title: 'Giá bán (VD: 199.000đ)',
+      title: 'Giá bán mặc định (VD: 199.000đ)',
+      description: 'Giá hiển thị ngoài trang chủ hoặc khi khách chưa chọn biến thể',
       type: 'string',
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'originalPrice',
-      title: 'Giá gốc (Tùy chọn - Dùng để hiển thị giá gạch ngang)',
+      title: 'Giá gốc mặc định (Tùy chọn - Dùng để hiển thị giá gạch ngang)',
       type: 'string',
     }),
+    
+    // --- PHẦN MỚI THÊM: BIẾN THỂ SẢN PHẨM ---
+    defineField({
+      name: 'variants',
+      title: 'Các biến thể gói (Tùy chọn)',
+      description: 'Thêm các lựa chọn cho khách hàng (VD: 1 Tháng, 1 Năm, Vĩnh viễn)',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            { 
+              name: 'variantName', 
+              title: 'Tên gói (VD: Gói 1 Tháng)', 
+              type: 'string' 
+            },
+            { 
+              name: 'variantPrice', 
+              title: 'Giá của gói này (VD: 99.000đ)', 
+              type: 'string' 
+            },
+            { 
+              name: 'variantOriginalPrice', 
+              title: 'Giá gốc của gói này (Tùy chọn)', 
+              type: 'string' 
+            }
+          ]
+        }
+      ]
+    }),
+    // ----------------------------------------
+
     defineField({
       name: 'tag',
       title: 'Nhãn nổi bật (VD: Bán chạy, Hot, Khuyên dùng)',

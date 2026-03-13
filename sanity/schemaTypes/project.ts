@@ -47,11 +47,24 @@ export const projectType = defineType({
       type: 'string',
     }),
     defineField({
-      name: 'content',
-      title: 'Nội dung Case Study',
-      description: 'Phân tích tổng quan, thử thách và giải pháp',
-      type: 'array',
-      of: [{ type: 'block' }], 
-    }),
+  name: 'content',
+  title: 'Nội dung chi tiết dự án',
+  type: 'array',
+  of: [
+    { type: 'block' },
+    {
+      type: 'image',
+      title: 'Chèn hình ảnh',
+      options: { hotspot: true },
+      fields: [
+        {
+          name: 'alt',
+          type: 'string',
+          title: 'Chú thích ảnh (Alt text - Tốt cho SEO)',
+        }
+      ]
+    }
+  ],
+}),
   ],
 })
