@@ -10,13 +10,14 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://trungtumkt06-web.vercel.app'), 
   title: 'Trung Tự Mkt | Lập trình Web & Digital Marketing',
   description: 'Kết hợp tư duy Marketing chiến lược và kỹ năng Lập trình Web để tạo ra những trải nghiệm số tối ưu và hiệu quả.',
   openGraph: {
     title: 'Trung Tự Mkt | Lập trình Web & Digital Marketing',
     description: 'Kết hợp tư duy Marketing chiến lược và kỹ năng Lập trình Web để tạo ra những trải nghiệm số tối ưu và hiệu quả.',
-    url: 'https://trungtumkt06-web.vercel.app/', // Sửa lại thành tên miền chính thức của bạn sau này
-    siteName: 'Trung Tự Mkt Portfolio',
+    url: 'https://trungtumkt06-web.vercel.app', 
+    siteName: 'Trung Tự Mkt',
     images: [
       {
         url: '/og-image.jpg',
