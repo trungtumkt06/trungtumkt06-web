@@ -10,8 +10,31 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Trung Tự | Portfolio & Cửa hàng số",
-  description: "Trang web cá nhân, portfolio và cung cấp tài khoản phần mềm",
+  title: 'Trung Tự Mkt | Lập trình Web & Digital Marketing',
+  description: 'Kết hợp tư duy Marketing chiến lược và kỹ năng Lập trình Web để tạo ra những trải nghiệm số tối ưu và hiệu quả.',
+  openGraph: {
+    title: 'Trung Tự Mkt | Lập trình Web & Digital Marketing',
+    description: 'Kết hợp tư duy Marketing chiến lược và kỹ năng Lập trình Web để tạo ra những trải nghiệm số tối ưu và hiệu quả.',
+    url: 'https://trungtumkt06-web.vercel.app/', // Sửa lại thành tên miền chính thức của bạn sau này
+    siteName: 'Trung Tự Mkt Portfolio',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Trung Tự Mkt Cover',
+      },
+    ],
+    locale: 'vi_VN',
+    type: 'website',
+  },
+
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Trung Tự Mkt | Lập trình Web & Digital Marketing',
+    description: 'Kết hợp tư duy Marketing chiến lược và kỹ năng Lập trình Web để tạo ra những trải nghiệm số tối ưu và hiệu quả.',
+    images: ['/og-image.jpg'],
+  },
 };
 
 export default function RootLayout({
