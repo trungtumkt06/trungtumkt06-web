@@ -62,7 +62,7 @@ export default function OrderSection({ product }: { product: any }) {
           Mua Ngay
         </button>
 
-        <Link href="/lien-he" className="flex-1 border-2 border-earth text-earth-dark px-8 py-4 rounded-xl font-bold text-lg hover:bg-earth-light transition-all duration-300 text-center flex items-center justify-center">
+        <Link href="https://zalo.me/84776910286" className="flex-1 border-2 border-earth text-earth-dark px-8 py-4 rounded-xl font-bold text-lg hover:bg-earth-light transition-all duration-300 text-center flex items-center justify-center">
           Tư Vấn Zalo
         </Link>
       </div>
