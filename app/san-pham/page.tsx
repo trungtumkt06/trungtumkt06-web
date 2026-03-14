@@ -70,7 +70,8 @@ export default async function ProductsPage({
             Khám phá <span className="text-earth">Sản phẩm số</span>
           </h1>
           <p className="text-lg md:text-xl text-earth-dark/60 max-w-2xl mx-auto leading-relaxed">
-            Các giải pháp phần mềm, tài khoản thiết kế và công cụ marketing với chi phí tối ưu, bảo hành uy tín và hỗ trợ kỹ thuật tận tâm.
+            Các tài khoản thiết kế, công cụ marketing và phần mềm với chi phí tối ưu, bảo hành uy tín và hỗ trợ kỹ thuật tận tâm.
+            Sau khi mua hàng, tôi sẽ liên hệ tư vấn và hỗ trợ bạn trong quá trình sử dụng sản phẩm. Chúng tôi cam kết mang đến trải nghiệm mua sắm trực tuyến an toàn, nhanh chóng và đáng tin cậy.
           </p>
         </div>
       </section>
