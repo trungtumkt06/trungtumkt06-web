@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { client } from '@/sanity/lib/client';
+export const revalidate = 60;
 
 // 1. Hàm lấy 3 Dự án mới nhất
 async function getFeaturedProjects() {
