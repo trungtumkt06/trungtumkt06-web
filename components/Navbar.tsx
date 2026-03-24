@@ -1,14 +1,13 @@
-"use client"; // Bắt buộc phải có dòng này ở trên cùng để dùng useState trong Next.js App Router
+"use client"; 
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation'; // Để nhận biết người dùng đang ở trang nào
+import { usePathname } from 'next/navigation';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
-  // Danh sách các trang để quản lý dễ dàng hơn
   const navLinks = [
     { name: "Trang Chủ", href: "/" },
     { name: "Giới Thiệu", href: "/gioi-thieu" },
@@ -40,7 +39,6 @@ export default function Navbar() {
                   `}
                 >
                   {link.name}
-                  {/* Hiệu ứng gạch chân cho trang hiện tại */}
                   {isActive && (
                     <span className="absolute left-0 bottom-0 w-full h-0.5 bg-earth-accent rounded-full"></span>
                   )}
@@ -57,12 +55,15 @@ export default function Navbar() {
           </Link>
         </div>
 
-        {/* Nút Toggle Menu Mobile */}
+        {/* Nút Toggle Menu Mobile - FIX TẠI ĐÂY */}
         <button 
-          className="md:hidden text-earth-dark focus:outline-none" 
-          onClick={() => setIsOpen(!isOpen)}
+          type="button" // 1. Thêm type="button" để tránh lỗi trình duyệt di động hiểu nhầm
+            className="md:hidden text-earth-dark focus:outline-none p-2 -mr-2 relative z-60"
+            onClick={() => setIsOpen(!isOpen)}
+          aria-label="Toggle menu"
         >
-          <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-7 h-7 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"> 
+            {/* 3. Thêm pointer-events-none để click không bị kẹt vào icon SVG */}
             {isOpen ? (
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             ) : (
@@ -74,7 +75,7 @@ export default function Navbar() {
 
       {/* Menu thả xuống cho Mobile */}
       {isOpen && (
-        <div className="md:hidden bg-white/95 backdrop-blur-lg border-t border-earth/10 shadow-lg absolute w-full left-0">
+        <div className="md:hidden bg-white/95 backdrop-blur-lg border-t border-earth/10 shadow-lg absolute w-full left-0 z-50">
           <ul className="flex flex-col px-6 py-4 space-y-4 font-medium text-earth-dark">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
@@ -83,7 +84,7 @@ export default function Navbar() {
                   <Link
                     href={link.href}
                     className={`block py-2 ${isActive ? 'text-earth-accent font-semibold' : 'hover:text-earth-accent'}`}
-                    onClick={() => setIsOpen(false)} // Tự động đóng menu khi bấm vào link
+                    onClick={() => setIsOpen(false)}
                   >
                     {link.name}
                   </Link>
